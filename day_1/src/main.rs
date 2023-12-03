@@ -18,5 +18,5 @@ fn get_document(file: &str) {
 
 
 fn main() {
-    get_document("input.txt")
+    get_document("day_1/input.txt")
 }
