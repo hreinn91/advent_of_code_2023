@@ -56,26 +56,31 @@ fn str_to_set(s: &str) -> HashSet<i32> {
     return numbers;
 }
 
-fn get_count(pile: &[Card]) -> i32 {
+// OBS slow but it works...
+// A better solution would be to cache the number of cards won by card starting with the last card
+fn get_count(pile: &[Card], is_copy: bool) -> i32 {
     let size = pile.len();
     if size == 0 {
         return 0;
     } else if size == 1 {
         return 1;
     }
-    let num_wins = &pile[1..size][0].count_wins();
-    let mut score = 0;
-    for i in 0..num_wins {
-        score +=
+    let num_wins = pile[0].count_wins();
+    let mut count = 1;
+    for i in 1..=num_wins {
+        count += get_count(&pile[i as usize..size], true);
     }
-    return 1 + get_count(&pile[1..size]) + ;
+    if !is_copy {
+        count += get_count(&pile[1..size], false)
+    }
+    return count;
 }
 
 fn main() {
-    let pile = get_cards("day_4/test01.txt");
+    let pile = get_cards("day_4/input.txt");
     let mut score_part_1 = 0;
     pile.iter().clone().for_each(|c| { score_part_1 += two_pow(c.count_wins()) });
-    let score_part_2 = get_count(&pile[..]);
+    let score_part_2 = get_count(&pile[..], false);
     println!("{score_part_1}");
     println!("{score_part_2}");
 }
