@@ -170,7 +170,7 @@ fn part2(map: &Map, mut distinct_positions: HashSet<(i32, i32)>) -> i32 {
 }
 
 fn main() {
-    let input = get_input("input.txt");
+    let input = get_input("test.txt");
     let map = Map::new(&input);
     let guard = part1(&map);
     let distinct_positions = guard.get_distinct_positions();
