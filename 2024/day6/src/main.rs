@@ -151,7 +151,7 @@ fn part2(map: &Map, mut distinct_positions: HashSet<(i32, i32)>) -> i32 {
     distinct_positions.remove(&guard_start_position);
     let total = distinct_positions.len();
     let mut i = 0;
-    for block_position in distinct_positions {
+    for block_position in distinct_positions { // For improvement - move the guard to the position before the block position
         i += 1;
         if i % 400 == 0 {
             println!("Progress: {}/{}", i * 100 / total, total * 100 / total);
